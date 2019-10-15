@@ -153,12 +153,47 @@ Take a look on the body of Execute method. When argument **Name** is empty,
 ```
 
 Close G1ANT.Robot.exe and build <ctrl+B> addon, restart G1ANT.Robot.exe 
-and try to execute "hello Max" command. First argument is optional, but if you
+and try to execute "hello Max" command. First argument is optional, 
+but you can see it's name and tooltip by autocompletion mechanism.
 
 ![Autocompletion](autocompletion.jpg)
 
 ## Structures
 
-## Access to the Scripter
+You can use many structures from G1ANT.Language.dll or create your own 
+(see G1ANT.Addon.Structure.Directory project G1ANT.Addon.Tutorials solution).
+
+C# Name | C# type | G1ANT name | Description
+------- | ------- | ---------- | -----------
+[Structure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/Structure.md) | Object | | base class
+[BooleanStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/BooleanStructure.md) | boolean | bool |
+[ColorStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ColorStructure.md) | Color | color |
+[DataTableStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DataTableStructure.md) | DataTable | table | 
+[DateStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DateTimeStructure.md) | DateTime | date | date part
+[DateTimeStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DateTimeStructure.md) | DateTime | datetime |
+[DictionaryStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DictionaryStructure.md) | Dictionary<string, object> | dictionary |
+[ErrorStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ErrorStructure.md) | Exception | error | 
+[FloatStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/FloatStructure.md) | double | float |
+[HtmlStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/HtmlStructure.md) | HtmlDocument | html | From HtmlAgilityPack | 
+[IntegerStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/IntegerStructure.md) | int | integer |
+[JsonStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/JsonStructure.md) | JObject | json | from Newtonsoft.Json |
+[LabelStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/LabelStructure.md) | string | label | This structure stores names of labels, which are called by the `jump` command |
+[ListStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ListStructure.md) | List<object> | list |
+[MessageStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/MessageStructure.md) | string | message |
+[MoneyStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/MoneyStructure.md) | decimal | money |
+[PathStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/PathStructure.md) | string | path |
+[PointStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/PointStructure.md) | Point | point |
+[ProcedureStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ProcedureStructure.md) | string | procedure | This structure stores names of procedures
+[RectangleStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/RectangleStructure.md) | Rectangle | rectangle |
+[TextStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/TextStructure.md) | string | text |
+[TimeSpanStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/TimespanStructure.md) | TimeSpan | timespan |
+[TimeStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/TimeStructure.md) | DateTime | time | time part
+[VariableStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/VariableStructure.md) | string | variable | This structure stores names of variables 
+[VersionStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/VersionStructure.md) | Version | version |
+[XmlStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/XmlStructure.md) | XmlDocument | xml |
 
 ## Result as Variable
+
+
+
+## Access to the Scripter

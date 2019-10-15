@@ -20,6 +20,8 @@ namespace G1ANT.Addon.Command.Hello
         {
             [Argument(Required = false, Tooltip = "Enter your name")]
             public TextStructure Name { get; set; }
+
+            public Structure
         }
 
         public void Execute(Arguments arguments)
