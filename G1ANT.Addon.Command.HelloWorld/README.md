@@ -163,8 +163,8 @@ but you can see it's name and tooltip by autocompletion mechanism.
 You can use many structures from G1ANT.Language.dll or create your own 
 (see G1ANT.Addon.Structure.Directory project G1ANT.Addon.Tutorials solution).
 
-C# Name | C# type | G1ANT name | Description
-------- | ------- | ---------- | -----------
+C# Structure | C# Type | G1ANT Name | Description
+------------ | ------- | ---------- | -----------
 [Structure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/Structure.md) | Object | | base class
 [BooleanStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/BooleanStructure.md) | boolean | bool |
 [ColorStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ColorStructure.md) | Color | color |
