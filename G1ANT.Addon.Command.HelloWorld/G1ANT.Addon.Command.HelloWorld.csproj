@@ -61,7 +61,6 @@
   <ItemGroup>
     <Compile Include="Addon.cs" />
     <EmbedResource Include="License.txt" />
-    <None Include="G1ANT.Addon.Command.Hello.md" />
     <!-- REMOVE IT
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -73,23 +72,31 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="README.md" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="autocompletion.jpg" />
+    <Content Include="hello-world.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>IF $(ConfigurationName) EQU Release (
-       @COPY $(TargetPath) $(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\G1ANT.Robot\Add-On /B /Y
-       @ECHO File was copied to $(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\G1ANT.Robot\Add-On\$(TargetFileName)
-       @ECHO Execute G1ANT.Robot and check it out on the Addons panel
+    <PostBuildEvent>@ECHO OFF
+IF $(ConfigurationName) EQU Release (
+       ECHO Copying file into $(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\G1ANT.Robot\Add-On\$(TargetFileName)
+      REM ( TYPE nul &gt;&gt; "$(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\G1ANT.Robot\Add-On\$(TargetFileName)" ) 2&gt;nul || GOTO :error
+       XCOPY "$(TargetPath)" "$(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\G1ANT.Robot\Add-On" /y /Q
+       IF %25errorlevel%25 NEQ 0 GOTO error
     ) ELSE (
-       @ECHO If you want to see your Addon in the G1ANT.Studio, you should
-       @ECHO Copy file '$(TargetPath)'
-       @ECHO Into '$(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\G1ANT.Robot\Add-On\$(TargetFileName)'
-       @ECHO or build in release environment
+       ECHO If you want to see your Addon in the G1ANT.Studio, you should
+       ECHO Copy file '$(TargetPath)'
+       ECHO Into '$(registry:HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders@Personal)\G1ANT.Robot\Add-On\$(TargetFileName)'
+       ECHO or build in release environment
     )
-</PostBuildEvent>
+GOTO :eof
+:error
+ECHO Please close G1ANT.Robot.exe before build</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

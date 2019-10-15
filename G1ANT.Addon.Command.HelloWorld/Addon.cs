@@ -8,7 +8,7 @@ using G1ANT.Language;
 
 namespace G1ANT.Addon.Command.Hello
 {
-    [Addon(Name = "Hello", Tooltip = "My first command Hello")]
+    [Addon(Name = "HelloWorld", Tooltip = "My first command Hello")]
     [Copyright(Author = "MyCompany Ltd", Copyright = "MyCompany Ltd", Email = "support@company.com", Website = "www.company.com")]
     [License(Type = "LGPL", ResourceName = "License.txt")]
     //[CommandGroup(Name = "", Tooltip = "")]

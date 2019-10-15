@@ -33,7 +33,7 @@ As result, the command will answer date time of display operation.
 You have empty project now, and the file Addon.cs should be filled by you.
 
 ```C#
-    [Addon(Name = "Hello", Tooltip = "This is my example addon")]
+    [Addon(Name = "HelloWorld", Tooltip = "This is my example addon")]
     [Copyright(Author = "John Smith", Copyright = "John Smith", Email = "johnsmith@gmail.com", Website = "www.johnsmith.com")]
     [License(Type = "LGPL", ResourceName = "License.txt")]
 ```
@@ -65,3 +65,100 @@ For now, **Name** and **Tooltip** parameters are enough, but in the future you c
 3. **IconName** - which icon should be displayed with that command. The icon should be stored as resource.
 4. **NeedsDelay** - is this necessary to use delay with that command, like **keyboard** and **mouse**?
 
+## Implement Execute method
+
+As the method body, let's display message "Hello World".
+
+```C#
+    [Command(Name = "hello", Tooltip = "Display hello message")]
+    public class HelloCommand : Language.Command
+    {
+
+        public HelloCommand(AbstractScripter scripter) :
+            base(scripter)
+        {
+        }
+
+        public class Arguments : CommandArguments
+        {
+        }
+
+        public void Execute(Arguments arguments)
+        {
+            MessageBox.Show("Hello World!");
+        }
+    }
+```
+
+Close G1ANT.Robot.exe. Compile <Ctrl+B> this example in release environment and 
+restart G1ANT.Robot.exe. 
+You should see the new addon "HelloWorld" on the left. 
+Select it and your command **hello** 
+will be available in G1ANT.Studio intelisence and autocompletion. 
+
+Let's use this command in the G1ANT's script:
+
+```G1ANT
+addon helloworld version 1.0.0.0
+addon language version 4.100.19036.1330
+
+hello
+```
+
+After execution you will see that message:
+
+![Hello world](hello-world.jpg)
+
+# Add some arguments for our command
+
+Let's display first given argument. For example:
+
+```G1ANT
+addon helloworld version 1.0.0.0
+addon language version 4.100.19036.1330
+
+hello John
+```
+
+After robot execution we should see "Hello John!" message. Let's write some code. 
+Arguments class should have one argument **Name** 
+which is name of the user we would like to greet.
+Take a look on the body of Execute method. When argument **Name** is empty, 
+"Hello World!" will be displayed.
+
+
+```C#
+    [Command(Name = "hello", Tooltip = "Display hello message")]
+    public class HelloCommand : Language.Command
+    {
+        public HelloCommand(AbstractScripter scripter) :
+            base(scripter)
+        {
+        }
+
+        public class Arguments : CommandArguments
+        {
+            [Argument(Required = false, Tooltip = "Enter your name")]
+            public TextStructure Name { get; set; }
+        }
+
+        public void Execute(Arguments arguments)
+        {
+            if (arguments.Name == null)
+                MessageBox.Show("Hello World!");
+            else
+                MessageBox.Show($"Hello {arguments.Name.Value}!");
+        }
+    }
+```
+
+Close G1ANT.Robot.exe and build <ctrl+B> addon, restart G1ANT.Robot.exe 
+and try to execute "hello Max" command. First argument is optional, but if you
+
+![Autocompletion](autocompletion.jpg)
+
+## Structures
+
+## Access to the Scripter
+
+## Result as Variable
