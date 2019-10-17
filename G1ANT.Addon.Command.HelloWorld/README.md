@@ -107,7 +107,7 @@ hello
 
 After execution you will see that message:
 
-![Hello world](hello-world.jpg)
+![Hello world](assets/hello-world.jpg)
 
 # Add some arguments for our command
 
@@ -156,7 +156,7 @@ Close G1ANT.Robot.exe and build <ctrl+B> addon, restart G1ANT.Robot.exe
 and try to execute "hello Max" command. First argument is optional, 
 but you can see it's name and tooltip by autocompletion mechanism.
 
-![Autocompletion](autocompletion.jpg)
+![Autocompletion](assets/autocompletion.jpg)
 
 ## Structures
 
@@ -240,7 +240,7 @@ hello
 dialog ♥result
 ```
 
-![Result](result.jpg)
+![Result](assets/result.jpg)
 
 Remember, that we've created command with two parameters, so it is possible to use it in different ways, like this:
 

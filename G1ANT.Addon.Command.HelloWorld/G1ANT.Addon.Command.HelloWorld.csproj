@@ -73,9 +73,9 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="autocompletion.jpg" />
-    <Content Include="hello-world.jpg" />
-    <Content Include="result.jpg" />
+    <Content Include="Assets\autocompletion.jpg" />
+    <Content Include="Assets\hello-world.jpg" />
+    <Content Include="Assets\result.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
