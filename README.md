@@ -2,4 +2,4 @@
 
 This repository contains all 
 
-1. [G1ANT.Addons.Comman.Hello](G1ANT.Addon.Command.Hello/README.md)
+1. [G1ANT.Addons.Comman.Hello](G1ANT.Addon.Command.Hello)
