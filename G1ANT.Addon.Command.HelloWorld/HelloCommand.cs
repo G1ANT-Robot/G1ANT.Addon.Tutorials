@@ -21,7 +21,7 @@ namespace G1ANT.Addon.Command.Hello
             [Argument(Required = false, Tooltip = "Enter your name")]
             public TextStructure Name { get; set; }
 
-            public Structure
+            public VariableStructure Result { get; set; } = new VariableStructure("result");
         }
 
         public void Execute(Arguments arguments)
@@ -29,7 +29,10 @@ namespace G1ANT.Addon.Command.Hello
             if (arguments.Name == null)
                 MessageBox.Show($"Hello World!");
             else
-                MessageBox.Show($"Hello {arguments.Name.Value}");
+                MessageBox.Show($"Hello {arguments.Name.Value}!");
+
+            Scripter.Variables.SetVariableValue(arguments.Result.Value, 
+                new TextStructure(Environment.UserName));
         }
     }
 }

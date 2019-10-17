@@ -194,6 +194,76 @@ C# Structure | C# Type | G1ANT Name | Description
 
 ## Result as Variable
 
+Ok, but how command can give us result of any operation? 
+Let's take current logged user from the system into variable.
 
+```C#
+    [Command(Name = "hello", Tooltip = "Display hello message")]
+    public class HelloCommand : Language.Command
+    {
+        public HelloCommand(AbstractScripter scripter) :
+            base(scripter)
+        {
+        }
+
+        public class Arguments : CommandArguments
+        {
+            [Argument(Required = false, Tooltip = "Enter your name")]
+            public TextStructure Name { get; set; }
+
+            public VariableStructure Result { get; set; } = new VariableStructure("result");
+        }
+
+        public void Execute(Arguments arguments)
+        {
+            if (arguments.Name == null)
+                MessageBox.Show($"Hello World!");
+            else
+                MessageBox.Show($"Hello {arguments.Name.Value}!");
+
+            Scripter.Variables.SetVariableValue(arguments.Result.Value, 
+                new TextStructure(Environment.UserName));
+        }
+    }
+```
+
+As you see on an example above, we've defined new argument **Result** as `VariableStructure`. 
+It means our command expects name of variable, where `Environment.UserName` will be stored. 
+Default name of these variable is **result**.
+
+The last line of the `Execute` method contains code which is responsible for variable setup.
+After build <Ctrl+B> you can execute script below, and as a result you will receive dialog message 
+with your username.
+
+```G1ANT
+hello
+dialog ♥result
+```
+
+![Result](result.jpg)
+
+Remember, that we've created command with two parameters, so it is possible to use it in different ways, like this:
+
+```G1ANT
+hello result ♥username
+dialog ♥username
+```
+
+or this:
+
+```G1ANT
+hello result ♥username name John
+dialog ♥username
+```
+
+or this:
+
+```G1ANT
+hello John result ♥username
+dialog ♥username
+```
 
 ## Access to the Scripter
+
+As you see, during command execution we have access to `Scripter` context, 
+so it is possible for example to take all variables by 'Scripter.Variables` property.
