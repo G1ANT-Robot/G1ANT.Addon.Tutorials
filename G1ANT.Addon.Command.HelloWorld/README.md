@@ -272,28 +272,28 @@ The most important properties and methods below:
 
 name | description
 ---- | -----------
-`public Dictionary<string, byte[]> Resources` | all files embeded with script
-`public Stack<[StackItem]> Stack` | Execution stack for block commands like procedure, check [StackItem class](StackItem-class)
-`public virtual int CurrentLine` |
-`public string[] ScriptLines` |
-`public virtual string CurrentLineText` |
-`public AbstractMacroResolver MacroResolver` |
-`public AbstractCommandManager Commands` |
-`AbstractLanguageParser Parser` |
-`AbstractStructureManager Structures` |
-`AbstractVariableManager Variables` |
-`AbstractLogger Log` |
-`abstract List<Addon> Addons` |
+`Dictionary<string, byte[]> Resources` | all files embeded with script
+`Stack<[StackItem]> Stack` | Execution stack for block commands like procedure, see [StackItem class](#stackitem-class)
+`virtual int CurrentLine` |
+`string[] ScriptLines` | All script lines
+`string Text` | All script lines, separated by `\r\n`
+`virtual string CurrentLineText` | Current script line
+`AbstractMacroResolver MacroResolver` | See [AbstractMacroResolver](#abstractmacroresolver-class)
+`AbstractCommandManager Commands` | See [AbstractCommandManager](#abstractcommandmanager-class)
+`AbstractLanguageParser Parser` | See [AbstractLanguageParser](#abstractlanguageparser-class)
+`AbstractStructureManager Structures` | See [AbstractStructureManager](#abstractstructuremanager-class)
+`AbstractVariableManager Variables` | See [AbstractVariableManager](#abstractvariablemanager-class)
+`AbstractLogger Log` | See [AbstractLogger](#abstractlogger-class)
+`abstract List<Addon> Addons` | All addons used by the script
 `abstract void AddAddon(Addon addon, bool updateScript = true)` |
 `abstract void RemoveAddon(Addon addon, bool updateScript = true)` |
-`string ProcessPath` | 
-`ProcessType TypeOfProcess` | 
-`bool Stopped` |
-`abstract void RunLine(string line)` |
-`abstract StackItem CreateStackItem(BlockItem block)` |
+`string ProcessPath` | Full path to the script file
+`bool Stopped` | Is the script stopped? or we can stop the script
+`abstract void RunLine(string line)` | Execute line of script code
+`abstract StackItem CreateStackItem(BlockItem block)` | See [BlockItem class](#blockitem-class)
 `abstract void Delay(int miliseconds = 1000)` |
 `abstract TimeSpan ExecutingTime` |
-`abstract StackItem CreateStackItem(BlockItem block)` |
+`abstract StackItem CreateStackItem(BlockItem block)` | See [BlockItem class](#blockitem-class)
 
 <!-- TODO: write description for all these elements above -->
 <!-- TODO: We shoul write more about classes we used here -->
