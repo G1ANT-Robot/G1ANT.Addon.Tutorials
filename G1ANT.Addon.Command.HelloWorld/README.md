@@ -267,3 +267,240 @@ dialog ♥username
 
 As you see, during command execution we have access to `Scripter` context, 
 so it is possible for example to take all variables by 'Scripter.Variables` property.
+
+The most important properties and methods below:
+
+name | description
+---- | -----------
+`public Dictionary<string, byte[]> Resources` | all files embeded with script
+`public Stack<[StackItem]> Stack` | Execution stack for block commands like procedure, check [StackItem class](StackItem-class)
+`public virtual int CurrentLine` |
+`public string[] ScriptLines` |
+`public virtual string CurrentLineText` |
+`public AbstractMacroResolver MacroResolver` |
+`public AbstractCommandManager Commands` |
+`AbstractLanguageParser Parser` |
+`AbstractStructureManager Structures` |
+`AbstractVariableManager Variables` |
+`AbstractLogger Log` |
+`abstract List<Addon> Addons` |
+`abstract void AddAddon(Addon addon, bool updateScript = true)` |
+`abstract void RemoveAddon(Addon addon, bool updateScript = true)` |
+`string ProcessPath` | 
+`ProcessType TypeOfProcess` | 
+`bool Stopped` |
+`abstract void RunLine(string line)` |
+`abstract StackItem CreateStackItem(BlockItem block)` |
+`abstract void Delay(int miliseconds = 1000)` |
+`abstract TimeSpan ExecutingTime` |
+`abstract StackItem CreateStackItem(BlockItem block)` |
+
+<!-- TODO: write description for all these elements above -->
+<!-- TODO: We shoul write more about classes we used here -->
+
+### StackItem class
+
+```C#
+    public class StackItem
+    {
+        public BlockItem Block { get; }
+        public int CallingLineNumber { get; }
+
+        public AbstractVariableManager Variables { get; set; }
+
+        public LabelStructure ErrorJump { get; set; }
+
+        public ProcedureStructure ErrorCall { get; set; }
+
+        public VariableStructure ErrorResult { get; set; }
+
+        public string ErrorMessage { get; set; }
+
+        public StackItem(BlockItem block, int line, AbstractVariableManager variableManager)
+        {
+            Block = block;
+            CallingLineNumber = line;
+            Variables = variableManager;
+        }
+    }
+```
+
+### AbstractMacroResolver class
+
+```C#
+    public abstract class AbstractMacroResolver : MarshalByRefObject
+    {
+        protected AbstractMacroResolver()
+        {
+        }
+
+        public abstract void Clear();
+
+        public abstract object EvalExpression(string text, AbstractScripter scripter, bool convertToStructure = false);
+    }
+```
+
+### AbstractCommandManager class
+
+```C#
+    public abstract class AbstractCommandManager : IEnumerable
+    {
+        public AbstractScripter Scripter { get; set; } = null;
+
+        protected AbstractCommandManager(AbstractScripter scripter)
+        {
+            Scripter = scripter;
+        }
+
+        public abstract Command FindCommand(string name);
+        public abstract Command FindCommand(Type classType);
+
+        public virtual string[] AvailableCommands { get; } = null;
+
+        public abstract Structure GetPropertyFromCmdArgument(CommandArguments arguments, string propertyName, Type type);
+
+        public abstract IEnumerator GetEnumerator();
+
+        public abstract IEnumerable<Command> GetAllCommands();
+
+        public abstract void Delay(int miliseconds = 1000);
+    }
+```
+
+### AbstractLanguageParser class
+
+```C#
+    public abstract class AbstractLanguageParser
+    {
+        public AbstractLanguageParser(AbstractScripter scripter)
+        {
+            Scripter = scripter;
+        }
+
+        public AbstractScripter Scripter { get; set; } = null;
+
+        public abstract ParserResult ParseLine(string line);
+
+        public abstract Structure ParseValue(string value, Type expectedType = null);
+
+        public abstract void ExtractVariableParts(string str, ref int pos, ref string variableName, ref string variableIndex,
+            bool tryToCompile = false);
+
+        public abstract string ReplaceVariables(string code, ref Dictionary<string, object> variables);
+    }
+```
+
+### AbstractStructureManager class
+
+```C#
+    public abstract class AbstractStructureManager
+    {
+        public AbstractStructureManager(AbstractScripter scripter)
+        {
+            Scripter = scripter;
+        }
+
+        public AbstractScripter Scripter { get; } = null;
+
+        public abstract Structure CreateStructure(object obj, string format = "", Type expectedType = null);
+
+        public abstract Structure CreateStructure(object obj, string typeName, string format);
+
+        public abstract Structure CreateStructure(ArgumentValue obj, string format = "");
+
+        public abstract Type GetValueTypeByStructName(string structName);
+
+        public abstract IEnumerable<Structure> GetAllStructures();
+    }
+```
+
+### AbstractVariableManager class
+
+```C#
+    public abstract class AbstractVariableManager : IEnumerable
+    {
+        public AbstractScripter Scripter { get; } = null;
+
+        protected AbstractVariableManager(AbstractScripter scripter)
+        {
+            Scripter = scripter;
+        }
+
+        public Variable GetVariable(string name)
+        {
+            return this[name];
+        }
+
+        public abstract T GetVariableValue<T>(string name, T defaultVal = default(T), bool setDefault = false);
+
+        public abstract void SetVariableValue(string name, Structure value);
+
+        public abstract void SetVariableValue(string name, string index, Structure value);
+
+        public abstract void ParseAndSetVariable(string name, string value);
+
+        public abstract IEnumerator GetEnumerator();
+
+        public abstract IList<Variable> GetAllVariables();
+
+        public abstract IList<Variable> GetAttributedVariables();
+
+        public abstract IList<Variable> GetScripterVariables();
+
+        public abstract Variable this[string key]
+        { get; }
+
+        public abstract bool ContainsKey(string name);
+
+        public abstract int Count { get; }
+    }
+```
+
+### AbstractLogger class
+
+```C#
+    public abstract class AbstractLogger
+    {
+        public enum Level
+        {
+            Trace,
+            Debug,
+            Info,
+            Warn,
+            Error,
+            Fatal
+        }
+
+        protected AbstractLogger(AbstractScripter scripter)
+        {
+            Scripter = scripter;
+        }
+
+        public abstract void LogMessage(Level level, string message);
+
+        public abstract void Log(Level level, string message);
+
+        public AbstractScripter Scripter { get; protected set; }
+    }
+```
+
+### BlockItem class
+
+```C#
+    public class BlockItem
+    {
+        public string CommandName { get; }
+        public ArgumentsBase DefaultArguments { get; }
+        public int StartLine { get; }
+        public int EndLine { get; set; } = -1;
+        public string Definition { get; }
+
+        public BlockItem(string name, ArgumentsBase defaultArguments, int startLine, string def)
+        {
+            CommandName = name;
+            DefaultArguments = defaultArguments;
+            this.StartLine = startLine;
+            Definition = def;
+        }
+    }
+```
