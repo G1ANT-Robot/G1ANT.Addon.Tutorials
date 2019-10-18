@@ -30,7 +30,7 @@ As result, the command will answer date time of display operation.
 
 ## Prepare header
 
-You have empty project now, and the file Addon.cs should be filled by you.
+You have empty project now, and the file **Addon.cs** should be filled by you.
 
 ```C#
     [Addon(Name = "HelloWorld", Tooltip = "This is my example addon")]
@@ -109,7 +109,7 @@ After execution you will see that message:
 
 ![Hello world](hello-world.jpg)
 
-# Add some arguments for our command
+## Add some arguments for our command
 
 Let's display first given argument. For example:
 
@@ -284,9 +284,9 @@ name | description
 `AbstractStructureManager Structures` | See [AbstractStructureManager](#abstractstructuremanager-class)
 `AbstractVariableManager Variables` | See [AbstractVariableManager](#abstractvariablemanager-class)
 `AbstractLogger Log` | See [AbstractLogger](#abstractlogger-class)
-`abstract List<Addon> Addons` | All addons used by the script
-`abstract void AddAddon(Addon addon, bool updateScript = true)` |
-`abstract void RemoveAddon(Addon addon, bool updateScript = true)` |
+`abstract List<Addon> Addons` | All addons used by the script, see [Addon](#addon-class)
+`abstract void AddAddon(Addon addon, bool updateScript = true)` | See [Addon](#addon-class)
+`abstract void RemoveAddon(Addon addon, bool updateScript = true)` | See [Addon](#addon-class)
 `string ProcessPath` | Full path to the script file
 `bool Stopped` | Is the script stopped? or we can stop the script
 `abstract void RunLine(string line)` | Execute line of script code
@@ -298,7 +298,7 @@ name | description
 <!-- TODO: write description for all these elements above -->
 <!-- TODO: We shoul write more about classes we used here -->
 
-### StackItem class
+## StackItem class
 
 ```C#
     public class StackItem
@@ -325,7 +325,7 @@ name | description
     }
 ```
 
-### AbstractMacroResolver class
+## AbstractMacroResolver class
 
 ```C#
     public abstract class AbstractMacroResolver : MarshalByRefObject
@@ -340,7 +340,7 @@ name | description
     }
 ```
 
-### AbstractCommandManager class
+## AbstractCommandManager class
 
 ```C#
     public abstract class AbstractCommandManager : IEnumerable
@@ -367,7 +367,7 @@ name | description
     }
 ```
 
-### AbstractLanguageParser class
+## AbstractLanguageParser class
 
 ```C#
     public abstract class AbstractLanguageParser
@@ -390,7 +390,7 @@ name | description
     }
 ```
 
-### AbstractStructureManager class
+## AbstractStructureManager class
 
 ```C#
     public abstract class AbstractStructureManager
@@ -414,7 +414,7 @@ name | description
     }
 ```
 
-### AbstractVariableManager class
+## AbstractVariableManager class
 
 ```C#
     public abstract class AbstractVariableManager : IEnumerable
@@ -456,7 +456,7 @@ name | description
     }
 ```
 
-### AbstractLogger class
+## AbstractLogger class
 
 ```C#
     public abstract class AbstractLogger
@@ -484,7 +484,7 @@ name | description
     }
 ```
 
-### BlockItem class
+## BlockItem class
 
 ```C#
     public class BlockItem
@@ -504,3 +504,411 @@ name | description
         }
     }
 ```
+
+## Addon class
+
+```C#
+    /// <summary>Any library of commands, structures, wizards and/r triggers
+    /// - must contain exactly one class that derives from Addon class, 
+    /// - must be marked with AddonAttribute, 
+    /// - must contain virtual methods Check(), Initialize()and Finalise().
+    /// </summary>
+    /// <example>
+    ///   <para>[Addon(name = "example")]</para>
+    ///   <para>public class ExampleAddon : Addon</para>
+    /// </example>
+    public class Addon : IDisposable
+    {
+        /// <summary>Assembly that contains current Addon.</summary>
+        public Assembly Assembly => Assembly.GetAssembly(GetType());
+
+        /// <summary>List of all currently loadded Addons.</summary>
+        public static Dictionary<string, Addon> Loaded { get; } = new Dictionary<string, Addon>();
+
+        private bool initialized = false;
+
+        /// <summary>Load an Addon from given assembly name.</summary>
+        public static Addon Load(string name)
+        {
+            //check for name in loaded assemblies
+            var assembly = AssemblyManager.Find(name);
+
+            if (assembly != null)
+            {
+                return Load(assembly);
+            }
+
+            //check for name in other sources
+            assembly = AssemblyManager.Load(name);
+
+            if (assembly != null)
+            {
+                return Load(assembly);
+            }
+
+            return null;
+        }
+
+        /// <summary>Load Addon from Assembly.</summary>
+        public static Addon Load(Assembly assembly)
+        {
+            if (assembly == null)
+                throw new ArgumentNullException(nameof(assembly));
+
+            Addon addon = Create(assembly);
+
+            if (addon != null)
+            {
+                var name = addon.Attributes.Name.ToLower();
+
+                //check in cache
+                if (Loaded.ContainsKey(name))
+                    return Loaded[name];
+
+                addon.Initialize();
+                Loaded.Add(name, addon);
+            }
+
+            return addon;
+        }
+
+        /// <summary>Create instance of class Addon from specified Assembly.</summary>
+        /// <param name="assembly">Assembly containing a class that is derived from Addon class and is marked with AddonAttribute.</param>
+        /// <returns>Instance of Addon class.</returns>
+        public static Addon Create(Assembly assembly)
+        {
+            foreach (Type type in assembly.GetTypes())
+            {
+                if (Attribute.IsDefined(type, typeof(AddonAttribute)))
+                {
+                    if (type.IsSubclassOf(typeof(Addon)))
+                    {
+                        try
+                        {
+                            return (Addon)Activator.CreateInstance(type);
+                        }
+                        catch (TargetInvocationException ex)
+                        {
+                            throw ex;
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new MissingMethodException("Class derived from Addon has to implement parameterless public constructor", ex);
+                        }
+                    }
+
+                    throw new MissingFieldException($"{type.Name} class with [Addon] attribute should be derived from Addon class");
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>List of commands defined in the current Addon.</summary>
+        public List<Command> Commands { get; } = new List<Command>();
+
+        /// <summary>List of triggers defined in the current Addon.</summary>
+        public List<Trigger> Triggers { get; } = new List<Trigger>();
+
+        /// <summary>List of sructures defined in the current Addon.</summary>
+        public List<Structure> Structures { get; } = new List<Structure>();
+
+        /// <summary>List of all variables defined in the current Addon.</summary>
+        public List<Variable> SpecialVariables { get; } = new List<Variable>();
+
+        /// <summary>List of dlls assigned to current Addon. These are strong or short names.</summary>
+        public List<string> Dlls { get; } = new List<string>();
+
+        /// <summary>List of all panels defined in the Addon.</summary>
+        public List<RobotPanel> Panels { get; } = new List<RobotPanel>();
+
+        /// <summary>List of all wizards defined in the Addon.</summary>
+        public List<Wizard> Wizards { get; } = new List<Wizard>();
+
+        /// <summary>List of all compilators defined in the Addon.</summary>
+        public List<AbstractSnippetsEvaluator> Compilers { get; } = new List<AbstractSnippetsEvaluator>();
+
+        /// <summary>
+        /// Load metadata of Addon contents, this means a lists of Commands, Structures, Triggers, Panels, Wizards, Compilers, SpecialVariables.
+        /// Can be overriden in derived class to load additional data with additional attributes.
+        /// </summary>
+        public virtual void LoadMetadata()
+        {
+            foreach (Type type in Assembly.GetTypes())
+            {
+                try
+                {
+                    if (Attribute.IsDefined(type, typeof(CommandAttribute)))
+                        Commands.Add((Command)Activator.CreateInstance(type, new object[] { null }));
+                    else if (Attribute.IsDefined(type, typeof(TriggerAttribute)))
+                        Triggers.Add((Trigger)Activator.CreateInstance(type));
+                    else if (Attribute.IsDefined(type, typeof(StructureAttribute)))
+                        Structures.Add((Structure)Activator.CreateInstance(type, new object[] { null, null, null }));
+                    else if (Attribute.IsDefined(type, typeof(VariableAttribute)))
+                        SpecialVariables.Add((Variable)Activator.CreateInstance(type, (AbstractScripter)null));
+                    else if (Attribute.IsDefined(type, typeof(PanelAttribute)))
+                        Panels.Add((RobotPanel)Activator.CreateInstance(type));
+                    else if (Attribute.IsDefined(type, typeof(WizardAttribute)))
+                        Wizards.Add((Wizard)Activator.CreateInstance(type));
+                    else if (Attribute.IsDefined(type, typeof(CompilerAttribute)))
+                        Compilers.Add((AbstractSnippetsEvaluator)Activator.CreateInstance(type));
+                }
+                catch (TargetInvocationException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw new MissingMethodException($"Class {type.FullName} has to implement parameterless public constructor", ex);
+                }
+            }
+        }
+
+        /// <summary>Load all dll files that are required by current Addon.</summary>
+        public virtual void LoadDlls()
+        {
+            Dlls.Clear();
+            foreach (var item in GetType().GetCustomAttributes())
+            {
+                if (item is AddonDllAttribute attribute)
+                {
+                    if (Assembly.IsDynamic == false)
+                    {
+                        if (Assembly.GetManifestResourceNames().
+                            Contains<string>(attribute.Name))
+                        {
+                            byte[] bytes = Assembly.GetResourceBytes(attribute.Name);
+                            try
+                            {
+                                Assembly.Load(bytes);
+                                Dlls.Add(attribute.Name);
+                            }
+                            catch
+                            {
+                                throw new DllNotFoundException($"Unable to load dll {attribute.Name} from resource. Make sure that it is in the right folder");
+                            }
+                        }
+                        else
+                            throw new DllNotFoundException($"Dll {attribute.Name} not found. Make sure that it is in the right folder");
+                    }
+                }
+            }
+        }
+
+        /// <summary>Verify that the Addon is written correctly. Throws an exception in case an error is found.</summary>
+        public virtual void Check()
+        {
+            if (Copyright == null)
+                throw new ApplicationException($"Addon '{GetType().FullName}' should be described by CopyrightAttribute.");
+            if (!Licenses.Where(x => !string.IsNullOrEmpty(x.UrlReference) || !string.IsNullOrEmpty(x.ResourceName)).Any())
+                throw new ApplicationException($"Addon '{GetType().FullName}' should be described by at least one LicenseAttribute.");
+            if (string.IsNullOrWhiteSpace(Attributes.Name))
+                throw new ArgumentNullException(nameof(Attributes.Name));
+            if (string.IsNullOrWhiteSpace(Attributes.Tooltip))
+                throw new ArgumentNullException(nameof(Attributes.Tooltip));
+            foreach (Command command in Commands)
+                command.Check();
+            foreach (Trigger trigger in Triggers)
+                trigger.Check();
+            foreach (Structure structure in Structures)
+                structure.Check();
+            foreach (Variable variable in SpecialVariables)
+                variable.Check();
+            foreach (RobotPanel panel in Panels)
+                panel.Check();
+            foreach (Wizard wizard in Wizards)
+                wizard.Check();
+        }
+
+        /// <summary>Called during initialisation of Addon during first load into Robot instance.</summary>
+        public virtual void Initialize()
+        {
+            if (initialized)
+                return;
+            initialized = true;
+
+            LoadDlls();
+            LoadMetadata();
+            Check();
+        }
+
+        private AddonAttribute _attributes = null;
+
+        /// <summary>Addon attribute assigned to current structure, containing i.e. name, tooltip...</summary>
+        public AddonAttribute Attributes => _attributes ?? (_attributes = GetAttributes());
+
+        private AddonAttribute GetAttributes()
+        {
+            var attributes = GetType().GetCustomAttributes(typeof(AddonAttribute), true);
+            return attributes.Length > 0 ? (AddonAttribute)attributes[0] :
+                throw new ApplicationException($"Addon '{GetType().FullName}' should be described by AddonAttribute.");
+        }
+
+        private string GetLicenseContent(LicenseAttribute license)
+        {
+            byte[] licenseContent = this.Assembly.GetManifestResourceBytes(license.ResourceName);
+            return Encoding.UTF8.GetString(licenseContent);
+        }
+
+        private List<LicenseAttribute> licenses = null;
+
+        public List<LicenseAttribute> Licenses
+        {
+            get
+            {
+                if (licenses == null)
+                    licenses = GetType().GetCustomAttributes<LicenseAttribute>(true).ToList();
+                return licenses;
+            }
+        }
+
+        private CopyrightAttribute copyright = null;
+
+        public CopyrightAttribute Copyright
+        {
+            get
+            {
+                if (copyright == null)
+                    copyright = GetType().GetCustomAttributes<CopyrightAttribute>(true).FirstOrDefault();
+
+                return copyright;
+            }
+        }
+
+        private List<CommandGroupAttribute> _commandGroups = null;
+
+        /// <summary>List of attribute CommandGroupAttribute assigned to commands, containing i.e. name, tooltip...</summary>
+        public List<CommandGroupAttribute> CommandGroups => _commandGroups ?? (_commandGroups = GetCommandGroups());
+
+        private List<CommandGroupAttribute> GetCommandGroups()
+        {
+            List<CommandGroupAttribute> result = new List<CommandGroupAttribute>();
+            var attributes = GetType().GetCustomAttributes(typeof(CommandGroupAttribute), true);
+            foreach (Command command in Commands)
+            {
+                if (string.IsNullOrWhiteSpace(command.GroupName) == false)
+                {
+                    var foundAttribute = attributes.Cast<CommandGroupAttribute>().Where(x => x.Name.ToLower() == command.GroupName.ToLower()).FirstOrDefault();
+                    var attr = new CommandGroupAttribute()
+                    {
+                        Name = command.GroupName.ToLower()
+                    };
+                    if (foundAttribute != null)
+                    {
+                        attr.Tooltip = foundAttribute?.Tooltip;
+                        attr.IconName = foundAttribute?.IconName;
+                    }
+                    result.Add(attr);
+                }
+            }
+            return result;
+        }
+
+        public Bitmap GetCommandGroupIcon(CommandGroupAttribute attribute)
+        {
+            return GetType().Assembly.GetResxImageResource(attribute.IconName) ??
+                typeof(Addon).Assembly.GetResxImageResource(attribute.IconName) ??
+                new Bitmap(1, 1);
+        }
+
+        public Version Version
+        {
+            get
+            {
+                return GetType().Assembly.GetName().Version;
+            }
+        }
+
+        protected Version emptyVersion = new Version();
+
+        public virtual bool IsMigrationNeeded(string script, Version previousVersion, AbstractScripter scripter)
+        {
+            return previousVersion == emptyVersion;
+        }
+
+        protected virtual string MigrateScript(string script, Version previousVersion, AbstractScripter scripter)
+        {
+            return script;
+        }
+
+        public string DoMigration(string script, Version previousVersion, AbstractScripter scripter)
+        {
+            script = MigrateScript(script, previousVersion, scripter);
+            if (IsMigrationNeeded(script, previousVersion, scripter))
+            {
+                // add entry for current addon
+                AddonCommand.InsertAddonToScript(ref script, this, scripter);
+            }
+
+            return script;
+        }
+
+        /// <summary>Method executed when work with Addon is finished. Used i.e. to remove temporary files.</summary>
+        public virtual void Dispose()
+        {
+
+        }
+
+
+        private string SerializeList(IEnumerable<string> elementXmlList, string parentName)
+        {
+            var result = new StringBuilder();
+            result.AppendLine($"<{parentName}>");
+            foreach (var elementXml in elementXmlList)
+            {
+                result.AppendLine(elementXml);
+            }
+            result.AppendLine($"</{parentName}>");
+
+            return result.ToString();
+        }
+
+        public string ToXml()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine("<G1ANT.Addon>");
+            sb.AppendLine("<Addon>");
+
+            sb.AppendLine("<AddonDetails>");
+
+            sb.AppendLine($"<Name>{SecurityElement.Escape(Attributes.Name)}</Name>");
+            sb.AppendLine($"<Tooltip>{SecurityElement.Escape(Attributes.Tooltip)}</Tooltip>");
+
+            var executingAssembly = Assembly.GetExecutingAssembly();
+            var fileName = Path.GetFileName(executingAssembly.Location);
+            var version = executingAssembly.GetName().Version.ToString();
+
+            sb.AppendLine($"<FileName>{SecurityElement.Escape(fileName)}</FileName>");
+            sb.AppendLine($"<Version>{SecurityElement.Escape(version)}</Version>");
+            if (Copyright != null)
+            {
+                sb.AppendLine($"<Copyright>{SecurityElement.Escape(Copyright.Copyright)}</Copyright>");
+                sb.AppendLine($"<Email>{SecurityElement.Escape(Copyright.Email)}</Email>");
+                sb.AppendLine($"<Website>{SecurityElement.Escape(Copyright.Website)}</Website>");
+            }
+
+            if (Licenses.Count != 0)
+            {
+                sb.AppendLine($"<LicenseType>{SecurityElement.Escape(Licenses.First().Type)}</LicenseType>");
+                sb.AppendLine($"<LicenseResource>{SecurityElement.Escape(Licenses.First().ResourceName)}</LicenseResource>");
+                sb.AppendLine($"<LicenseUrl>{SecurityElement.Escape(Licenses.First().UrlReference)}</LicenseUrl>");
+            }
+            sb.AppendLine("</AddonDetails>");
+
+            sb.Append(SerializeList(Commands.Select(c => c.ToXml()), "Commands"));
+            sb.Append(SerializeList(Triggers.Select(t => t.ToXml()), "Triggers"));
+            sb.Append(SerializeList(Structures.Select(s => s.ToXml()), "Structures"));
+            sb.Append(SerializeList(SpecialVariables.Select(sv => sv.ToXml()), "SpecialVariables"));
+            sb.Append(SerializeList(Panels.Select(p => p.ToXml()), "Panels"));
+            sb.Append(SerializeList(Wizards.Select(w => w.ToXml()), "Wizards"));
+            sb.Append(SerializeList(Compilers.Select(c => c.ToXml()), "Compilers"));
+
+            sb.AppendLine("</Addon>");
+            sb.AppendLine("</G1ANT.Addon>");
+
+            return XDocument.Parse(sb.ToString())
+                .ToString();
+        }
+    }
+}```
