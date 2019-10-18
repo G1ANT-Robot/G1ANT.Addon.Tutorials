@@ -160,37 +160,37 @@ but you can see it's name and tooltip by autocompletion mechanism.
 
 ## Structures
 
-You can use many structures from G1ANT.Language.dll or create your own 
+You can use many structures from **G1ANT.Language.dll** or create your own 
 (see G1ANT.Addon.Structure.Directory project G1ANT.Addon.Tutorials solution).
 
 C# Structure | C# Type | G1ANT Name | Description
 ------------ | ------- | ---------- | -----------
 [Structure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/Structure.md) | Object | | base class
-[BooleanStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/BooleanStructure.md) | boolean | bool |
-[ColorStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ColorStructure.md) | Color | color |
-[DataTableStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DataTableStructure.md) | DataTable | table | 
-[DateStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DateTimeStructure.md) | DateTime | date | date part
-[DateTimeStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DateTimeStructure.md) | DateTime | datetime |
+[BooleanStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/BooleanStructure.md) | [boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean) | bool |
+[ColorStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ColorStructure.md) | [Color](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.color) | color |
+[DataTableStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DataTableStructure.md) | [DataTable](https://docs.microsoft.com/en-us/dotnet/api/system.data.datatable) | table | 
+[DateStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DateTimeStructure.md) | [DateTime](https://docs.microsoft.com/en-us/dotnet/api/system.datetime) | date | date part
+[DateTimeStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DateTimeStructure.md) | [DateTime](https://docs.microsoft.com/en-us/dotnet/api/system.datetime) | datetime |
 [DictionaryStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/DictionaryStructure.md) | Dictionary<string, object> | dictionary |
-[ErrorStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ErrorStructure.md) | Exception | error | 
-[FloatStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/FloatStructure.md) | double | float |
-[HtmlStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/HtmlStructure.md) | HtmlDocument | html | From HtmlAgilityPack | 
-[IntegerStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/IntegerStructure.md) | int | integer |
-[JsonStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/JsonStructure.md) | JObject | json | from Newtonsoft.Json |
-[LabelStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/LabelStructure.md) | string | label | This structure stores names of labels, which are called by the `jump` command |
+[ErrorStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ErrorStructure.md) | [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception) | error | 
+[FloatStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/FloatStructure.md) | [double](https://docs.microsoft.com/en-us/dotnet/api/system.double) | float |
+[HtmlStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/HtmlStructure.md) | [HtmlDocument](https://html-agility-pack.net/manipulation) | html | From HtmlAgilityPack | 
+[IntegerStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/IntegerStructure.md) | [int](https://docs.microsoft.com/en-us/dotnet/api/system.int32) | integer |
+[JsonStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/JsonStructure.md) | [JObject](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_Linq_JObject.htm) | json | from Newtonsoft.Json |
+[LabelStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/LabelStructure.md) | [string](https://docs.microsoft.com/en-us/dotnet/api/system.string) | label | This structure stores names of labels, which are called by the `jump` command |
 [ListStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ListStructure.md) | List<object> | list |
-[MessageStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/MessageStructure.md) | string | message |
-[MoneyStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/MoneyStructure.md) | decimal | money |
-[PathStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/PathStructure.md) | string | path |
-[PointStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/PointStructure.md) | Point | point |
-[ProcedureStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ProcedureStructure.md) | string | procedure | This structure stores names of procedures
-[RectangleStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/RectangleStructure.md) | Rectangle | rectangle |
-[TextStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/TextStructure.md) | string | text |
-[TimeSpanStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/TimespanStructure.md) | TimeSpan | timespan |
-[TimeStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/TimeStructure.md) | DateTime | time | time part
-[VariableStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/VariableStructure.md) | string | variable | This structure stores names of variables 
-[VersionStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/VersionStructure.md) | Version | version |
-[XmlStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/XmlStructure.md) | XmlDocument | xml |
+[MessageStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/MessageStructure.md) | [string](https://docs.microsoft.com/en-us/dotnet/api/system.string) | message |
+[MoneyStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/MoneyStructure.md) | [decimal](https://docs.microsoft.com/en-us/dotnet/api/system.decimal) | money |
+[PathStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/PathStructure.md) | [string](https://docs.microsoft.com/en-us/dotnet/api/system.string) | path |
+[PointStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/PointStructure.md) | [Point](https://docs.microsoft.com/en-us/dotnet/api/system.windows.point) | point |
+[ProcedureStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/ProcedureStructure.md) | [string](https://docs.microsoft.com/en-us/dotnet/api/system.string) | procedure | This structure stores names of procedures
+[RectangleStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/RectangleStructure.md) | [Rectangle](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.rectangle) | rectangle |
+[TextStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/TextStructure.md) | [string](https://docs.microsoft.com/en-us/dotnet/api/system.string) | text |
+[TimeSpanStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/TimespanStructure.md) | [TimeSpan](https://docs.microsoft.com/en-us/dotnet/api/system.timespan) | timespan |
+[TimeStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/TimeStructure.md) | [DateTime](https://docs.microsoft.com/en-us/dotnet/api/system.datetime) | time | time part
+[VariableStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/VariableStructure.md) | [string](https://docs.microsoft.com/en-us/dotnet/api/system.string) | variable | This structure stores names of variables 
+[VersionStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/VersionStructure.md) | [Version](https://docs.microsoft.com/en-us/dotnet/api/system.version) | version |
+[XmlStructure](https://manual.g1ant.com/G1ANT.Addons/G1ANT.Language/Structures/XmlStructure.md) | [XmlDocument](https://docs.microsoft.com/en-us/dotnet/api/system.xml.xmldocument) | xml |
 
 ## Result as Variable
 
