@@ -1,6 +1,6 @@
 ﻿# G1ANT.Addon.Command.Hello
 
-G1ANT.Studio is a open platform, which enable you to create new features like Commands, Structures, Compilers, Triggers, Panels and Wizards. 
+G1ANT.Studio is an open platform, which enable you to create new features like Commands, Structures, Compilers, Triggers, Panels and Wizards. 
 In this tutorial I will show you how to create new Command in G1ANT.Studio.
 
 First of all, you should install [G1ANT.Addon.Sdk](https://github.com/G1ANT-Robot/G1ANT.Sdk/raw/master/G1ANT.Sdk.vsix) in your Visual Studio Environment. When you are ready, let's go to the next step.
