@@ -1,0 +1,231 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Content Remove="wwwroot\css\addons-pro\cards-extended.css" />
+    <Content Remove="wwwroot\css\addons-pro\cards-extended.min.css" />
+    <Content Remove="wwwroot\css\addons-pro\chat.css" />
+    <Content Remove="wwwroot\css\addons-pro\chat.min.css" />
+    <Content Remove="wwwroot\css\addons-pro\muli-range.css" />
+    <Content Remove="wwwroot\css\addons-pro\muli-range.min.css" />
+    <Content Remove="wwwroot\css\addons-pro\steppers.css" />
+    <Content Remove="wwwroot\css\addons-pro\steppers.min.css" />
+    <Content Remove="wwwroot\css\addons-pro\timeline.css" />
+    <Content Remove="wwwroot\css\addons-pro\timeline.min.css" />
+    <Content Remove="wwwroot\css\addons\datatables-select.css" />
+    <Content Remove="wwwroot\css\addons\datatables-select.min.css" />
+    <Content Remove="wwwroot\css\addons\datatables.css" />
+    <Content Remove="wwwroot\css\addons\datatables.min.css" />
+    <Content Remove="wwwroot\css\addons\directives.css" />
+    <Content Remove="wwwroot\css\addons\directives.min.css" />
+    <Content Remove="wwwroot\css\addons\flag.css" />
+    <Content Remove="wwwroot\css\addons\flag.min.css" />
+    <Content Remove="wwwroot\css\addons\rating.css" />
+    <Content Remove="wwwroot\css\addons\rating.min.css" />
+    <Content Remove="wwwroot\css\addons\zmd.hierarchical-display.css" />
+    <Content Remove="wwwroot\css\addons\zmd.hierarchical-display.min.css" />
+    <Content Remove="wwwroot\css\bootstrap.css" />
+    <Content Remove="wwwroot\css\bootstrap.min.css" />
+    <Content Remove="wwwroot\css\mdb-free.css" />
+    <Content Remove="wwwroot\css\mdb-free.min.css" />
+    <Content Remove="wwwroot\css\mdb-lite-free.css" />
+    <Content Remove="wwwroot\css\mdb-lite-free.min.css" />
+    <Content Remove="wwwroot\css\mdb-lite-pro.css" />
+    <Content Remove="wwwroot\css\mdb-lite-pro.min.css" />
+    <Content Remove="wwwroot\css\mdb-pro.css" />
+    <Content Remove="wwwroot\css\mdb-pro.min.css" />
+    <Content Remove="wwwroot\css\mdb.lite.css" />
+    <Content Remove="wwwroot\css\mdb.lite.min.css" />
+    <Content Remove="wwwroot\css\modules\accordion-extended.css" />
+    <Content Remove="wwwroot\css\modules\accordion-extended.min.css" />
+    <Content Remove="wwwroot\css\modules\animations-extended.css" />
+    <Content Remove="wwwroot\css\modules\animations-extended.min.css" />
+    <Content Remove="wwwroot\css\modules\charts.css" />
+    <Content Remove="wwwroot\css\modules\charts.min.css" />
+    <Content Remove="wwwroot\css\modules\lightbox.css" />
+    <Content Remove="wwwroot\css\modules\lightbox.min.css" />
+    <Content Remove="wwwroot\css\modules\megamenu.css" />
+    <Content Remove="wwwroot\css\modules\megamenu.min.css" />
+    <Content Remove="wwwroot\css\modules\parallax.css" />
+    <Content Remove="wwwroot\css\modules\parallax.min.css" />
+    <Content Remove="wwwroot\css\style.css" />
+    <Content Remove="wwwroot\css\style.min.css" />
+    <Content Remove="wwwroot\js\addons-pro\chat.js" />
+    <Content Remove="wwwroot\js\addons-pro\chat.min.js" />
+    <Content Remove="wwwroot\js\addons-pro\multi-range.js" />
+    <Content Remove="wwwroot\js\addons-pro\multi-range.min.js" />
+    <Content Remove="wwwroot\js\addons-pro\simple-charts.js" />
+    <Content Remove="wwwroot\js\addons-pro\simple-charts.min.js" />
+    <Content Remove="wwwroot\js\addons-pro\steppers.js" />
+    <Content Remove="wwwroot\js\addons-pro\steppers.min.js" />
+    <Content Remove="wwwroot\js\addons-pro\timeline.js" />
+    <Content Remove="wwwroot\js\addons-pro\timeline.min.js" />
+    <Content Remove="wwwroot\js\addons\datatables-select.js" />
+    <Content Remove="wwwroot\js\addons\datatables-select.min.js" />
+    <Content Remove="wwwroot\js\addons\datatables.js" />
+    <Content Remove="wwwroot\js\addons\datatables.min.js" />
+    <Content Remove="wwwroot\js\addons\imagesloaded.pkgd.min.js" />
+    <Content Remove="wwwroot\js\addons\jquery.zmd.hierarchical-display.js" />
+    <Content Remove="wwwroot\js\addons\jquery.zmd.hierarchical-display.min.js" />
+    <Content Remove="wwwroot\js\addons\masonry.pkgd.min.js" />
+    <Content Remove="wwwroot\js\addons\progressBar.js" />
+    <Content Remove="wwwroot\js\addons\progressBar.min.js" />
+    <Content Remove="wwwroot\js\addons\rating.js" />
+    <Content Remove="wwwroot\js\addons\rating.min.js" />
+    <Content Remove="wwwroot\js\bootstrap.js" />
+    <Content Remove="wwwroot\js\bootstrap.min.js" />
+    <Content Remove="wwwroot\js\jquery-3.4.1.min.js" />
+    <Content Remove="wwwroot\js\mdb.js" />
+    <Content Remove="wwwroot\js\mdb.lite.js" />
+    <Content Remove="wwwroot\js\mdb.lite.min.js" />
+    <Content Remove="wwwroot\js\mdb.min.js" />
+    <Content Remove="wwwroot\js\popper.min.js" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\css\addons-pro\cards-extended.css" />
+    <None Include="wwwroot\css\addons-pro\cards-extended.min.css" />
+    <None Include="wwwroot\css\addons-pro\chat.css" />
+    <None Include="wwwroot\css\addons-pro\chat.min.css" />
+    <None Include="wwwroot\css\addons-pro\muli-range.css" />
+    <None Include="wwwroot\css\addons-pro\muli-range.min.css" />
+    <None Include="wwwroot\css\addons-pro\steppers.css" />
+    <None Include="wwwroot\css\addons-pro\steppers.min.css" />
+    <None Include="wwwroot\css\addons-pro\timeline.css" />
+    <None Include="wwwroot\css\addons-pro\timeline.min.css" />
+    <None Include="wwwroot\css\addons\datatables-select.css" />
+    <None Include="wwwroot\css\addons\datatables-select.min.css" />
+    <None Include="wwwroot\css\addons\datatables.css" />
+    <None Include="wwwroot\css\addons\datatables.min.css" />
+    <None Include="wwwroot\css\addons\directives.css" />
+    <None Include="wwwroot\css\addons\directives.min.css" />
+    <None Include="wwwroot\css\addons\flag.css" />
+    <None Include="wwwroot\css\addons\flag.min.css" />
+    <None Include="wwwroot\css\addons\rating.css" />
+    <None Include="wwwroot\css\addons\rating.min.css" />
+    <None Include="wwwroot\css\addons\zmd.hierarchical-display.css" />
+    <None Include="wwwroot\css\addons\zmd.hierarchical-display.min.css" />
+    <None Include="wwwroot\css\bootstrap.css" />
+    <None Include="wwwroot\css\bootstrap.min.css" />
+    <None Include="wwwroot\css\mdb-free.css" />
+    <None Include="wwwroot\css\mdb-free.min.css" />
+    <None Include="wwwroot\css\mdb-lite-free.css" />
+    <None Include="wwwroot\css\mdb-lite-free.min.css" />
+    <None Include="wwwroot\css\mdb-lite-pro.css" />
+    <None Include="wwwroot\css\mdb-lite-pro.min.css" />
+    <None Include="wwwroot\css\mdb-pro.css" />
+    <None Include="wwwroot\css\mdb-pro.min.css" />
+    <None Include="wwwroot\css\mdb.lite.css" />
+    <None Include="wwwroot\css\mdb.lite.min.css" />
+    <None Include="wwwroot\css\modules\accordion-extended.css" />
+    <None Include="wwwroot\css\modules\accordion-extended.min.css" />
+    <None Include="wwwroot\css\modules\animations-extended.css" />
+    <None Include="wwwroot\css\modules\animations-extended.min.css" />
+    <None Include="wwwroot\css\modules\charts.css" />
+    <None Include="wwwroot\css\modules\charts.min.css" />
+    <None Include="wwwroot\css\modules\lightbox.css" />
+    <None Include="wwwroot\css\modules\lightbox.min.css" />
+    <None Include="wwwroot\css\modules\megamenu.css" />
+    <None Include="wwwroot\css\modules\megamenu.min.css" />
+    <None Include="wwwroot\css\modules\parallax.css" />
+    <None Include="wwwroot\css\modules\parallax.min.css" />
+    <None Include="wwwroot\css\style.css" />
+    <None Include="wwwroot\css\style.min.css" />
+    <None Include="wwwroot\font\roboto\Roboto-Bold.eot" />
+    <None Include="wwwroot\font\roboto\Roboto-Bold.ttf" />
+    <None Include="wwwroot\font\roboto\Roboto-Bold.woff" />
+    <None Include="wwwroot\font\roboto\Roboto-Bold.woff2" />
+    <None Include="wwwroot\font\roboto\Roboto-Light.eot" />
+    <None Include="wwwroot\font\roboto\Roboto-Light.ttf" />
+    <None Include="wwwroot\font\roboto\Roboto-Light.woff" />
+    <None Include="wwwroot\font\roboto\Roboto-Light.woff2" />
+    <None Include="wwwroot\font\roboto\Roboto-Medium.eot" />
+    <None Include="wwwroot\font\roboto\Roboto-Medium.ttf" />
+    <None Include="wwwroot\font\roboto\Roboto-Medium.woff" />
+    <None Include="wwwroot\font\roboto\Roboto-Medium.woff2" />
+    <None Include="wwwroot\font\roboto\Roboto-Regular.eot" />
+    <None Include="wwwroot\font\roboto\Roboto-Regular.ttf" />
+    <None Include="wwwroot\font\roboto\Roboto-Regular.woff" />
+    <None Include="wwwroot\font\roboto\Roboto-Regular.woff2" />
+    <None Include="wwwroot\font\roboto\Roboto-Thin.eot" />
+    <None Include="wwwroot\font\roboto\Roboto-Thin.ttf" />
+    <None Include="wwwroot\font\roboto\Roboto-Thin.woff" />
+    <None Include="wwwroot\font\roboto\Roboto-Thin.woff2" />
+    <None Include="wwwroot\img\flags.png" />
+    <None Include="wwwroot\img\lightbox\default-skin.png" />
+    <None Include="wwwroot\img\lightbox\default-skin.svg" />
+    <None Include="wwwroot\img\lightbox\preloader.gif" />
+    <None Include="wwwroot\img\overlays\01.png" />
+    <None Include="wwwroot\img\overlays\02.png" />
+    <None Include="wwwroot\img\overlays\03.png" />
+    <None Include="wwwroot\img\overlays\04.png" />
+    <None Include="wwwroot\img\overlays\05.png" />
+    <None Include="wwwroot\img\overlays\06.png" />
+    <None Include="wwwroot\img\overlays\07.png" />
+    <None Include="wwwroot\img\overlays\08.png" />
+    <None Include="wwwroot\img\overlays\09.png" />
+    <None Include="wwwroot\img\sample.jpg" />
+    <None Include="wwwroot\img\svg\arrow_left.svg" />
+    <None Include="wwwroot\img\svg\arrow_right.svg" />
+    <None Include="wwwroot\img\svg\flags.png" />
+    <None Include="wwwroot\js\addons-pro\chat.js" />
+    <None Include="wwwroot\js\addons-pro\chat.min.js" />
+    <None Include="wwwroot\js\addons-pro\multi-range.js" />
+    <None Include="wwwroot\js\addons-pro\multi-range.min.js" />
+    <None Include="wwwroot\js\addons-pro\simple-charts.js" />
+    <None Include="wwwroot\js\addons-pro\simple-charts.min.js" />
+    <None Include="wwwroot\js\addons-pro\steppers.js" />
+    <None Include="wwwroot\js\addons-pro\steppers.min.js" />
+    <None Include="wwwroot\js\addons-pro\timeline.js" />
+    <None Include="wwwroot\js\addons-pro\timeline.min.js" />
+    <None Include="wwwroot\js\addons\datatables-select.js" />
+    <None Include="wwwroot\js\addons\datatables-select.min.js" />
+    <None Include="wwwroot\js\addons\datatables.js" />
+    <None Include="wwwroot\js\addons\datatables.min.js" />
+    <None Include="wwwroot\js\addons\imagesloaded.pkgd.min.js" />
+    <None Include="wwwroot\js\addons\jquery.zmd.hierarchical-display.js" />
+    <None Include="wwwroot\js\addons\jquery.zmd.hierarchical-display.min.js" />
+    <None Include="wwwroot\js\addons\masonry.pkgd.min.js" />
+    <None Include="wwwroot\js\addons\progressBar.js" />
+    <None Include="wwwroot\js\addons\progressBar.min.js" />
+    <None Include="wwwroot\js\addons\rating.js" />
+    <None Include="wwwroot\js\addons\rating.min.js" />
+    <None Include="wwwroot\js\bootstrap.js" />
+    <None Include="wwwroot\js\bootstrap.min.js" />
+    <None Include="wwwroot\js\jquery-3.4.1.min.js" />
+    <None Include="wwwroot\js\mdb.js" />
+    <None Include="wwwroot\js\mdb.lite.js" />
+    <None Include="wwwroot\js\mdb.lite.min.js" />
+    <None Include="wwwroot\js\mdb.min.js" />
+    <None Include="wwwroot\js\popper.min.js" />
+    <None Include="wwwroot\mdb-addons\mdb-lightbox-ui.html" />
+    <None Include="wwwroot\mdb-addons\preloader.html" />
+    <None Include="wwwroot\templates\about-us.html" />
+    <None Include="wwwroot\templates\blog-post.html" />
+    <None Include="wwwroot\templates\blog-posts.html" />
+    <None Include="wwwroot\templates\contact-us.html" />
+    <None Include="wwwroot\templates\ecommerce.html" />
+    <None Include="wwwroot\templates\landing-page.html" />
+    <None Include="wwwroot\templates\login-page.html" />
+    <None Include="wwwroot\templates\pricing.html" />
+    <None Include="wwwroot\templates\profile-page.html" />
+    <None Include="wwwroot\templates\signup-page.html" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+  </ItemGroup>
+
+</Project>
