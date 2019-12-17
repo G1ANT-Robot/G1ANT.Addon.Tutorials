@@ -1,8 +1,89 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model DefaultModel
+@{
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section topbar
+{
+    <span>Dashboard</span>
+}
+
+<div class="col-md-6 mb-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Robots</h5>
+            <table class="table table-hover">
+                <thead class="grey lighten-4">
+                    <tr>
+                        <th>#</th>
+                        <th>Robot Serial</th>
+                        <th>Robot Url</th>
+                        <th>Is Active</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int index = 1;
+                        foreach (var robot in G1ANT.Robot.Api.Orchestrator.Data.Data.Robots)
+                        {
+                            <tr>
+                                <th scope="row">@index</th>
+                                <td>@robot.SerialNumber</td>
+                                <td>http://@robot.Machine:@robot.Port</td>
+                                <td>
+                                    @if (robot.Active)
+                                    {
+                                        <i class="fa fa-thumbs-up green-text" />
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-thumbs-down red-text" />
+                                    }
+                                </td>
+                                <td>
+                                    <a class="btn-flat" href="/Home/BreakProcess/?serialNumber=@robot.SerialNumber">Break</a>
+                                </td>
+                            </tr>
+                            index++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
+<div class="col-md-6 mb-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Events</h5>
+            <table class="table table-hover">
+                <thead class="grey lighten-4">
+                    <tr>
+                        <th>#</th>
+                        <th>When</th>
+                        <th>Robot Serial</th>
+                        <th>Event Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int eventNo = 1;
+                        foreach (var eventData in G1ANT.Robot.Api.Orchestrator.Data.Data.Events)
+                        {
+                            <tr>
+                                <th scope="row">@eventNo</th>
+                                <td>@eventData.When</td>
+                                <td>@eventData.SerialNumber</td>
+                                <td>@eventData.Name</td>
+                                <td>@eventData.Description</td>
+                            </tr>
+                            index++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

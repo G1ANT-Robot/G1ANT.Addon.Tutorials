@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace G1ANT.Robot.Api.Orchestrator.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class ApiController : ControllerBase
     {

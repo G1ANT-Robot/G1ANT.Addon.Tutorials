@@ -144,7 +144,8 @@ Result:
    },
    { 
    ...
-]```
+]
+```
 
 ### POST: Addon/Put
 
