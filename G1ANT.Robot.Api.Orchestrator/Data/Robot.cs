@@ -28,6 +28,7 @@ namespace G1ANT.Robot.Api.Orchestrator.Data
             foreach(var eventName in SubscribedEvents)
             {
                 string xml = $"<Subscription event=\"{eventName}\"><Url>{baseUrl}/api/event</Url><Subscription>";
+                new ApiClient(Machine, Port, SerialNumber, Token).Post("/subscriptions/start", "subscriptionxml=" + xml);
             }
         }
 

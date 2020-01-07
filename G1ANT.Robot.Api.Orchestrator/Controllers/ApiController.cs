@@ -25,6 +25,12 @@ namespace G1ANT.Robot.Api.Orchestrator.Controllers
             return "value";
         }
 
+        [HttpGet, HttpPost]
+        public void Event()
+        {
+            return;
+        }
+
         // POST: api/Api
         [HttpPost]
         public void Post([FromBody] string value)

@@ -25,26 +25,24 @@ namespace G1ANT.Robot.Api.Orchestrator.Controllers
 
         public IActionResult SubscribeAll(DefaultModel model)
         {
-            if (!string.IsNullOrWhiteSpace(model.SerialNumber))
-            {
-                foreach (var robot in Data.Data.Robots)
-                    if (robot.Active)
-                        try
-                        {
-                            robot.Subscribe(Url.Content("~/"));
-                        }
-                        catch (Exception ex)
-                        {
-                            return View("Index", new DefaultModel() 
-                            { 
-                                Information = $"Unable to subscribe events from the robot {robot.SerialNumber}. {ex.Message}", 
-                                InformationClass = "red-text" 
-                            });
-                        }
-                    return View("Index", new DefaultModel() { Information = "All robots subscribed to get data", InformationClass = "green-text" });
-            }
-            else
-                return View("Index");
+            foreach (var robot in Data.Data.Robots)
+                if (robot.Active)
+                    try
+                    {
+                        if (Request.IsHttps)
+                            robot.Subscribe("https://" + Request.Host.Value);
+                        else
+                            robot.Subscribe("http://" + Request.Host.Value);
+                    }
+                    catch (Exception ex)
+                    {
+                        return View("Index", new DefaultModel() 
+                        { 
+                            Information = $"Unable to subscribe events from the robot {robot.SerialNumber}. {ex.Message}", 
+                            InformationClass = "red-text" 
+                        });
+                    }
+                return View("Index", new DefaultModel() { Information = "All robots subscribed to get data", InformationClass = "green-text" });
         }
 
         public IActionResult BreakProcess(DefaultModel model)
