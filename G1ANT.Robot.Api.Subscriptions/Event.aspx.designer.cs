@@ -11,7 +11,7 @@ namespace G1ANT.Robot.Api.Subscriptions
 {
 
 
-    public partial class ProcessStart
+    public partial class Event
     {
     }
 }

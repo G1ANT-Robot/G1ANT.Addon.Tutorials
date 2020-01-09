@@ -14,7 +14,10 @@ namespace G1ANT.Robot.Api.Subscriptions
         {
             string fileName = Server.MapPath("~/App_Data") + "/lastevent.json";
             using (var reader = new StreamReader(Request.InputStream))
-                File.WriteAllText(fileName, reader.ReadToEnd());
+            {
+                string body = reader.ReadToEnd();
+                File.WriteAllText(fileName, body);
+            }
         }
     }
 }

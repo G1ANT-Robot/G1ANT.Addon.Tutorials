@@ -28,10 +28,10 @@ namespace G1ANT.Robot.Api.Orchestrator.Data
 
         public List<string> SubscribedEvents { get; } = new List<string>()
         {
-            /*"TriggerStatusChanged",
+            "TriggerStatusChanged",
             "TriggerRaised",
             "ProgramStatusChanged",
-            "ProcessStop",*/
+            "ProcessStop",
             "ProcessStart",
             // "CommandExecutedEvent" UNDONE: This is not working bug 858
         };
@@ -40,8 +40,7 @@ namespace G1ANT.Robot.Api.Orchestrator.Data
         {
             foreach(var eventName in SubscribedEvents)
             {
-                //string xml = $"<Subscription Event=\"{eventName}\"><Url>{baseUrl}/api/{eventName}</Url></Subscription>";
-                string xml = $"<Subscription Event=\"{eventName}\"><Url>{baseUrl}/Test.cshtml</Url></Subscription>";
+                string xml = $"<Subscription Event=\"{eventName}\"><Url>{baseUrl}/api/{eventName}</Url></Subscription>";
                 new ApiClient(Machine, Port, SerialNumber, Token).Post("/subscriptions/start", "", "SubscriptionXml=" + xml);
             }
         }
