@@ -20,6 +20,9 @@ namespace G1ANT.Robot.Api.Orchestrator.Controllers
 
         public IActionResult Index(DefaultModel model)
         {
+            //if (!string.IsNullOrWhiteSpace(model.SerialNumber))
+            //    Data.Data.CurrentRobot = from robot in Data.Data.Robots 
+
             return View();
         }
 

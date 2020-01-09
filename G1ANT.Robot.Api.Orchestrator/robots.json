@@ -1,0 +1,10 @@
+{
+  "Robots": {
+    "Chris": {
+      "Host": "localhost",
+      "Port": 1234,
+      "SerialNumber": "9CE84FC88CB006",
+      "Token": "9CE867D195B02E"
+    }
+  }
+}

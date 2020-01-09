@@ -11,9 +11,8 @@ namespace G1ANT.Robot.Api.Orchestrator.Data
     {
         public static List<Event> Events { get; } = new List<Event>();
 
-        public static List<Robot> Robots { get; } = new List<Robot>()
-        {
-            new Robot("localhost", 1234, "9CE84FC88CB006", "9CE867D195B02E")
-        };
+        public static List<Robot> Robots { get; } = new List<Robot>();
+
+        public static Robot CurrentRobot { get; set; } = null;
     }
 }

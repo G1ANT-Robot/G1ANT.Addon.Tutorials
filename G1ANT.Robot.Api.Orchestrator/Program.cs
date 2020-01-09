@@ -18,6 +18,23 @@ namespace G1ANT.Robot.Api.Orchestrator
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddJsonFile(
+                        "robots.json", optional: false, reloadOnChange: false);
+                    config.AddJsonFile(
+                        "user.robots.json", optional: true, reloadOnChange: false);
+                    config.AddCommandLine(args);
+                    var robots = config.Build().GetSection("Robots");
+                    foreach(var section in robots.GetChildren())
+                    {
+                        Data.Robot robot = new Data.Robot();
+                        section.Bind(robot);
+                        robot.Name = section.Key;
+                        Data.Data.Robots.Add(robot);
+                    }
+                    
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

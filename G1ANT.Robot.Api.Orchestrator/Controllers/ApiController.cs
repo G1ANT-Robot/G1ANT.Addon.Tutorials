@@ -4,49 +4,46 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using G1ANT.Robot.Api.Orchestrator.Models;
+using System.Json;
+using System.Text.Json.Serialization;
+using System.IO;
 
 namespace G1ANT.Robot.Api.Orchestrator.Controllers
 {
-    [Route("api")]
+    [Route("api/{action}")]
     [ApiController]
     public class ApiController : ControllerBase
     {
-        // GET: api/Api
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Api/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        [HttpGet, HttpPost]
-        public void Event()
-        {
-            return;
-        }
-
-        // POST: api/Api
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Event()
         {
+            return "OK";
         }
 
-        // PUT: api/Api/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost]
+        public string TriggerStatusChanged()
         {
+            return "OK";
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost]
+        // [FromBody] ApiProcessModel model
+        public string ProcessStart()
         {
+            string body;
+            HttpContext.Request.EnableBuffering();
+            Request.Body.Position = 0;
+            using (StreamReader stream = new StreamReader(HttpContext.Request.Body))
+            {
+                var task = stream
+                    .ReadToEndAsync()
+                    .ContinueWith(t => {
+                        body = t.Result;
+                    });
+                task.Wait();
+            }
+            return "OK";
         }
     }
 }
