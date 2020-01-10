@@ -13,7 +13,15 @@ namespace G1ANT.Robot.Api.Orchestrator.Connector
         public int Port { get; set; } = 1234;
         public string SerialNumber { get; set; } = string.Empty;
 
-        public ApiClient(string machine = "localhost", int port = 1234, string serialNumber = "", string token = "")
+        public ApiClient(string serialNumber, string token)
+        {
+            Token = token;
+            SerialNumber = serialNumber;
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        }
+
+        public ApiClient(string machine, int port, string serialNumber, string token)
         {
             Machine = machine;
             Port = port;
@@ -25,7 +33,9 @@ namespace G1ANT.Robot.Api.Orchestrator.Connector
 
         public string SendFile(string fileName, string query = "", string parameters = "")
         {
-            string url = $"http://{Machine}:{Port}{query}/?token={Token}&serialnumber={SerialNumber}&{parameters}";
+            string url = $"{query}/?token={Token}&serialnumber={SerialNumber}&{parameters}";
+            if (!url.StartsWith("http"))
+                url = $"http://{Machine}:{Port}" + url;
 
             System.IO.FileInfo file = new System.IO.FileInfo(fileName);
             int fileLength = (int)file.Length;
@@ -57,23 +67,44 @@ namespace G1ANT.Robot.Api.Orchestrator.Connector
                 return new System.IO.StreamReader(stream).ReadToEnd();
         }
 
+        public string Execute(string query, string method, string body = "", string parameters = "")
+        {
+            switch(method.Trim().ToUpper())
+            {
+                case "POST":
+                    return Post(query, body, parameters);
+                case "GET":
+                    return Get(query, parameters);
+                case "PUT":
+                    return Put(query, body, parameters);
+                default:
+                    throw new NotImplementedException();
+            }
+        }
+
         public string Post(string query, string body, string parameters = "")
         {
-            string url = $"http://{Machine}:{Port}{query}/?token={Token}&serialnumber={SerialNumber}&{parameters}";
+            string url = $"{query}/?token={Token}&serialnumber={SerialNumber}&{parameters}";
+            if (!url.StartsWith("http"))
+                url = $"http://{Machine}:{Port}" + url;
             WebClient client = new WebClient();
             return client.UploadString(url, "POST", body);
         }
 
         public string Put(string query, string body, string parameters = "")
         {
-            string url = $"http://{Machine}:{Port}{query}/?token={Token}&serialnumber={SerialNumber}&{parameters}";
+            string url = $"{query}/?token={Token}&serialnumber={SerialNumber}&{parameters}";
+            if (!url.StartsWith("http"))
+                url = $"http://{Machine}:{Port}" + url;
             WebClient client = new WebClient();
             return client.UploadString(url, "PUT", body);
         }
 
         public string Get(string query, string parameters = "")
         {
-            string url = $"http://{Machine}:{Port}{query}/?token={Token}&serialnumber={SerialNumber}&{parameters}";
+            string url = $"{query}/?token={Token}&serialnumber={SerialNumber}&{parameters}";
+            if (!url.StartsWith("http"))
+                url = $"http://{Machine}:{Port}" + url;
             WebClient client = new WebClient();
             return client.DownloadString(url);
         }

@@ -29,7 +29,7 @@
                         {
                             <tr>
                                 <th scope="row">@index</th>
-                                <td>@robot.SerialNumber</td>
+                                <td><a href="~/?SerialNumber=@robot.SerialNumber">@robot.SerialNumber</a></td>
                                 <td>http://@robot.Machine:@robot.Port</td>
                                 <td>
                                     @if (robot.Active)

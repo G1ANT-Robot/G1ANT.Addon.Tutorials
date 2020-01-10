@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using G1ANT.Robot.Api.Orchestrator.Models;
+using G1ANT.Robot.Api.Orchestrator.Connector;
 
 namespace G1ANT.Robot.Api.Orchestrator.Controllers
 {
@@ -64,6 +65,202 @@ namespace G1ANT.Robot.Api.Orchestrator.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult AddonList(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch(Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult AddonPut(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult ProcessesList(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult ProcessesGet(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult ProcessesBreak(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult ProcessesRun(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult ProcessesPut(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult TriggersSettingsSet(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult TriggersSettingsGet(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult TriggersEnable(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult TriggersDisable(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult SubscriptionsList(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult SubscriptionsStart(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
+        }
+
+        public IActionResult SubscriptionsStop(RobotQueryModel model)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(model.Query))
+                    model.Result = new ApiClient(model.SerialNumber, model.Robot?.Token).Execute(model.Query, model.Method, model.Body, model.Parameters);
+            }
+            catch (Exception ex)
+            {
+                model.Result = $"ERROR: {ex.Message}";
+            }
+            return View(model);
         }
     }
 }

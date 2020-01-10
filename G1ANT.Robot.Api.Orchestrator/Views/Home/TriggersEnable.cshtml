@@ -1,0 +1,53 @@
+﻿@using G1ANT.Robot.Api.Orchestrator.Data
+@model RobotQueryModel
+@{
+}
+
+@section topbar
+{
+    <span>Triggers/Enable</span>
+}
+
+<div class="col-md-6 mb-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Query</h5>
+            <form name="RobotQuery" action="~/Home/AddonList" method="post">
+                <div class="form-group">
+                    <label for="SerialNumber">SerialNumber</label>
+                    <input type="text" class="form-control" id="SerialNumber" placeholder="" name="SerialNumber" value="@Data.CurrentRobot?.SerialNumber" />
+                    <label for="Token">Token</label>
+                    <input type="text" class="form-control" id="Token" placeholder="" name="Token" value="@Data.CurrentRobot?.Token" />
+                </div>
+                <div class="form-group">
+                    <label for="Query">Query</label>
+                    <input type="text" class="form-control" id="Query" placeholder="" name="Query" value="http://@Data.CurrentRobot?.Machine:@Data.CurrentRobot?.Port/triggers/enable">
+                    <label for="Method">Method</label>
+                    <input type="text" class="form-control" id="Method" placeholder="GET" name="Method" value="GET">
+                    <label for="Parameters">Parameters</label>
+                    <input type="text" class="form-control" id="Parameters" placeholder="" name="Parameters" value="@Model?.Parameters">
+                </div>
+                <div class="form-group">
+                    <label for="Body">Body</label>
+                    <textarea class="form-control rounded-0" id="Body" rows="10">@Model?.Body</textarea>
+                </div>
+                <div class="text-center col-md-12 mt-3 mb-2">
+                    <button type="submit" class="btn btn-success btn-block btn-rounded z-depth-1 btn-dark-green">Send</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-6 mb-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Answer</h5>
+            <div class="form-group">
+                <label for="Result">Result</label>
+                <textarea class="form-control rounded-0" id="Result" rows="25" name="Result" readonly="readonly">@Model?.Result</textarea>
+            </div>
+        </div>
+    </div>
+</div>
+

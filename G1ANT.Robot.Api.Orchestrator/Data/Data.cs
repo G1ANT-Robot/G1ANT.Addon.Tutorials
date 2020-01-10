@@ -22,22 +22,29 @@ namespace G1ANT.Robot.Api.Orchestrator.Data
             }
             set
             {
-                serialNumber = value.Trim().ToUpper();
-                currentRobot = null;
-                foreach (var item in Robots)
-                    if (serialNumber == item.SerialNumber.Trim().ToUpper())
-                    {
-                        currentRobot = item;
-                        return;
-                    }
-
+                serialNumber = value?.Trim().ToUpper();
+                if (!string.IsNullOrWhiteSpace(serialNumber))
+                {
+                    currentRobot = null;
+                    foreach (var item in Robots)
+                        if (serialNumber == item.SerialNumber.Trim().ToUpper())
+                        {
+                            currentRobot = item;
+                            return;
+                        }
+                }
             }
         }
 
         private static Robot currentRobot;
         public static Robot CurrentRobot 
         {
-            get { return currentRobot; }
+            get 
+            {
+                if (currentRobot == null && Robots.Count > 0)
+                    currentRobot = Robots[0];
+                return currentRobot; 
+            }
         }
     }
 }

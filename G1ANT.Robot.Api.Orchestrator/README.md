@@ -52,6 +52,13 @@ whereas in the `...` you should enter the serial number of your program. As we c
 
 ![Running](running.jpg)
 
+## API Testers
+
+You can check our API here: 
+
+1. [Swagger](https://g1antrobotapiswagger-dev.azurewebsites.net/#)
+2. [Our Mini Orchestrator](https://g1antorchestrator.azurewebsites.net)
+
 ## List of all commands
 
 There are example how to use API from G1ANT.Robot.
