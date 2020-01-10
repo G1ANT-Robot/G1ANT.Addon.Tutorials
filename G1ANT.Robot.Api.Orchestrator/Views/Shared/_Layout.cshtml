@@ -1,4 +1,5 @@
-﻿@model DefaultModel
+﻿@using G1ANT.Robot.Api.Orchestrator.Data
+@model DefaultModel
 <!DOCTYPE html>
 <html lang="en">
 
@@ -159,11 +160,18 @@
                     <h4 class="mb-2 mb-sm-0 pt-1">
                         @RenderSection("topbar")
                     </h4>
-                    <form class="d-flex justify-content-center">
-                        <input type="search" placeholder="Type your query" aria-label="Search" class="form-control">
-                        <button class="btn btn-primary btn-sm my-0 p" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
+                    <form class="d-flex justify-content-center" name="Search" action="~/" method="GET">
+                        @if (!string.IsNullOrWhiteSpace(Data.SerialNumber))
+                        {
+                            <input type="search" placeholder="Enter serial number" aria-label="Search" class="form-control" name="SerialNumber" value="@Data.SerialNumber">
+                        }
+                        else
+                        {
+                            <input type="search" placeholder="Enter serial number" aria-label="Search" class="form-control" name="SerialNumber" >
+                        }
+                            <button class="btn btn-primary btn-sm my-0 p btn-dark-green" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
                     </form>
                 </div>
             </div>

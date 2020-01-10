@@ -13,6 +13,31 @@ namespace G1ANT.Robot.Api.Orchestrator.Data
 
         public static List<Robot> Robots { get; } = new List<Robot>();
 
-        public static Robot CurrentRobot { get; set; } = null;
+        private static string serialNumber;
+        public static string SerialNumber
+        {
+            get
+            {
+                return serialNumber;
+            }
+            set
+            {
+                serialNumber = value.Trim().ToUpper();
+                currentRobot = null;
+                foreach (var item in Robots)
+                    if (serialNumber == item.SerialNumber.Trim().ToUpper())
+                    {
+                        currentRobot = item;
+                        return;
+                    }
+
+            }
+        }
+
+        private static Robot currentRobot;
+        public static Robot CurrentRobot 
+        {
+            get { return currentRobot; }
+        }
     }
 }

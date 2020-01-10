@@ -26,15 +26,7 @@ namespace G1ANT.Robot.Api.Orchestrator.Data
             SerialNumber = serialNumber;
         }
 
-        public List<string> SubscribedEvents { get; } = new List<string>()
-        {
-            "TriggerStatusChanged",
-            "TriggerRaised",
-            "ProgramStatusChanged",
-            "ProcessStop",
-            "ProcessStart",
-            // "CommandExecutedEvent" UNDONE: This is not working bug 858
-        };
+        public List<string> SubscribedEvents { get; } = new List<string>();
 
         public void Subscribe(string baseUrl)
         {

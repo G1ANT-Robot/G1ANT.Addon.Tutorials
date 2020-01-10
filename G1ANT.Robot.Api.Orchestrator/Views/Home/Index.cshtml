@@ -1,4 +1,5 @@
-﻿@model DefaultModel
+﻿@using G1ANT.Robot.Api.Orchestrator.Data
+@model DefaultModel
 @{
 }
 
@@ -24,7 +25,7 @@
                 <tbody>
                     @{
                         int index = 1;
-                        foreach (var robot in G1ANT.Robot.Api.Orchestrator.Data.Data.Robots)
+                        foreach (var robot in Data.Robots)
                         {
                             <tr>
                                 <th scope="row">@index</th>
@@ -69,17 +70,18 @@
                 <tbody>
                     @{
                         int eventNo = 1;
-                        foreach (var eventData in G1ANT.Robot.Api.Orchestrator.Data.Data.Events)
-                        {
-                            <tr>
-                                <th scope="row">@eventNo</th>
-                                <td>@eventData.When</td>
-                                <td>@eventData.SerialNumber</td>
-                                <td>@eventData.Name</td>
-                                <td>@eventData.Description</td>
-                            </tr>
-                            index++;
-                        }
+                        foreach (var eventData in Data.Events)
+                            if (string.IsNullOrWhiteSpace(Data.SerialNumber) || Data.SerialNumber == eventData.SerialNumber)
+                            {
+                                <tr>
+                                    <th scope="row">@eventNo</th>
+                                    <td>@eventData.When</td>
+                                    <td>@eventData.SerialNumber</td>
+                                    <td>@eventData.Name</td>
+                                    <td>@eventData.Description</td>
+                                </tr>
+                                eventNo++;
+                            }
                     }
                 </tbody>
             </table>
