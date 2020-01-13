@@ -347,3 +347,7 @@ whereas subscription.xml is file like that
 	<Url>callback url</Url>
 <Subscription>
 ```
+
+## Summary
+
+Take a look on the ASP.NET MCV web application. There you can find how to use all API features.
