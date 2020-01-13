@@ -274,7 +274,7 @@ Setup settings section for the all triggers on the local G1ANT.Robot
 
 ```G1ANT
 ♥triggers = ⊂System.IO.File.ReadAllText(@"c:\users\chris\downloads\triggers.xml")⊃
-call Api query /triggers/settings/set method POST parameters triggersxml=♥triggers
+call Api query /triggers/settings/set method POST body ♥triggers
 ```
 
 ## POST: Triggers/Enable
@@ -320,7 +320,7 @@ Start subscription
 
 ```G1ANT
 ♥subscription = ⊂System.IO.File.ReadAllText(@"c:\users\chris\downloads\subscription.xml")⊃
-call Api query /subscriptions/list method GET parameters subscriptionxml=♥subscription
+call Api query /subscriptions/start method POST body ♥subscription
 ```
 
 whereas subscription.xml is file like that
@@ -337,7 +337,7 @@ Stop subscription
 
 ```G1ANT
 ♥subscription = ⊂System.IO.File.ReadAllText(@"c:\users\chris\downloads\subscription.xml")⊃
-call Api query /subscriptions/stop method GET parameters subscriptionxml=♥subscription
+call Api query /subscriptions/stop method POST body ♥subscription
 ```
 
 whereas subscription.xml is file like that
