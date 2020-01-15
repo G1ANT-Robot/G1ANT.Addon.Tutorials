@@ -12,7 +12,7 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Query</h5>
-            <form name="RobotQuery" action="~/Home/AddonList" method="post">
+            <form name="RobotQuery" action="~/Home/ProcessesPut" method="post">
                 <div class="form-group">
                     <label for="SerialNumber">SerialNumber</label>
                     <input type="text" class="form-control" id="SerialNumber" placeholder="" name="SerialNumber" value="@Data.CurrentRobot?.SerialNumber" />
@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group">
                     <label for="Query">Query</label>
-                    <input type="text" class="form-control" id="Query" placeholder="" name="Query" value="http://@Data.CurrentRobot?.Machine:@Data.CurrentRobot?.Port/addon/list">
+                    <input type="text" class="form-control" id="Query" placeholder="" name="Query" value="http://@Data.CurrentRobot?.Machine:@Data.CurrentRobot?.Port/processes/put">
                     <label for="Method">Method</label>
                     <input type="text" class="form-control" id="Method" placeholder="POST" name="Method" value="POST">
                     <label for="Parameters">Parameters</label>
@@ -38,7 +38,7 @@
                     <label for="Body">Body</label>
                     @if (string.IsNullOrWhiteSpace(Model?.Body))
                     {
-                        <textarea class="form-control rounded-0" id="Body" rows="10">@Model?.Body</textarea>
+                        <textarea class="form-control rounded-0" id="Body" rows="10" name="Body">@Model?.Body</textarea>
                     }
                     else
                     {
