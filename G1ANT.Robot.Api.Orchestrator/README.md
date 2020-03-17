@@ -23,6 +23,7 @@ We have to put the last <WebServer> section:
  ...
  <WebServer>
   <Enabled>true</Enabled>
+  <Hostname>localhost<Hostname>
   <Port>1234</Port>
     <Tokens>
       <Token Name="Chris" Value="9CE867D195B02E" />
